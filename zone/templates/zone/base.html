@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Pipcup{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'zone/style.css' %}">
 </head>
 
@@ -14,8 +15,10 @@
     <header>
         <nav>
             <div class="brand">Pipcup</div>
-            <div>
-                <!-- Add nav links here later -->
+            <div class="nav-links">
+                <a href="{% url 'home' %}" class="nav-item"><i class="fas fa-home"></i> Home</a>
+                <a href="{% url 'post' %}" class="nav-item"><i class="fas fa-plus-square"></i> Post</a>
+                <a href="#" class="nav-item"><i class="fas fa-sign-in-alt"></i> Login</a>
             </div>
         </nav>
     </header>
