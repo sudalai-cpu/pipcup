@@ -34,12 +34,26 @@ nav {
     font-size: 1.8rem;
     font-weight: bold;
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-logo-simple {
+    height: 1.8rem;
+    width: auto;
+    border-radius: 4px;
 }
 
 /* Nav Links Styles */
 .nav-links {
     display: flex;
     gap: 20px;
+}
+
+.footer-nav {
+    justify-content: center;
+    margin-top: 5px;
 }
 
 .nav-item {
@@ -64,8 +78,30 @@ footer {
     background-color: #333;
     color: var(--white);
     text-align: center;
-    padding: 1rem;
-    margin-top: auto;
+    padding: 0.8rem;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: space-around;
+    /* Distribute icons evenly */
+    align-items: center;
+    margin: 0;
+}
+
+.footer-nav .nav-item {
+    font-size: 1.5rem;
+    /* Increase icon size */
+    padding: 5px;
 }
 
 main {
@@ -253,4 +289,34 @@ main {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+/* Floating Circular Button Styles */
+.btn-circle-floating {
+    position: fixed;
+    bottom: 100px;
+    /* Lifted above footer */
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--super-color);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+    font-weight: bold;
+    font-size: 1.2rem;
+    z-index: 900;
+    transition: transform 0.3s;
+}
+
+.btn-circle-floating:hover {
+    transform: scale(1.1);
+}
+
+.btn-circle-floating i {
+    margin: 0;
 }

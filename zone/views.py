@@ -2,19 +2,21 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comment
 
 def home(request):
-    return render(request, 'zone/home.html')
-
-def post_page(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
         image = request.FILES.get('image')
         
         Post.objects.create(title=title, content=content, image=image)
-        return redirect('post')
+        return redirect('home')
     
     posts = Post.objects.all().order_by('-created_at')
-    return render(request, 'zone/post.html', {'posts': posts})
+    return render(request, 'zone/home.html', {'posts': posts})
+
+def sale_page(request):
+    return render(request, 'zone/sale.html')
+
+
 
 from django.http import JsonResponse
 
