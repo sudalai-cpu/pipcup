@@ -9,7 +9,13 @@ def home(request):
         content = request.POST.get('content')
         image = request.FILES.get('image')
         
-        Post.objects.create(title=title, content=content, image=image)
+        # Determine the author
+        if request.user.is_authenticated:
+            author = request.user
+        else:
+            author = User.objects.first() or User.objects.create(username='testuser')
+            
+        Post.objects.create(user=author, title=title, content=content, image=image)
         return redirect('home')
     
     posts = Post.objects.all().order_by('-created_at')
@@ -40,11 +46,28 @@ def profile(request):
     if request.user.is_authenticated:
         user = request.user
     else:
-        # For testing, if not logged in, show the first user's profile
         user = User.objects.first()
         if not user:
-            # Create a test user if none exists
             user, created = User.objects.get_or_create(username='testuser', email='test@example.com')
     
     profile, created = Profile.objects.get_or_create(user=user)
+
+    if request.method == 'POST':
+        new_username = request.POST.get('username')
+        new_bio = request.POST.get('bio')
+        new_image = request.FILES.get('image')
+
+        if new_username:
+            user.username = new_username
+            user.save()
+        
+        if new_bio is not None:
+            profile.bio = new_bio
+        
+        if new_image:
+            profile.image = new_image
+        
+        profile.save()
+        return redirect('profile')
+
     return render(request, 'zone/profile.html', {'profile': profile})

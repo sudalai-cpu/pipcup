@@ -10,6 +10,7 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 class Post(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
     image = models.ImageField(upload_to='posts/', blank=True, null=True)
     content = models.TextField()
