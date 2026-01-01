@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post, Comment
+from .models import Post, Comment, Profile
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def home(request):
     if request.method == 'POST':
@@ -34,3 +36,15 @@ def add_comment(request, post_id):
             Comment.objects.create(post=post, content=content)
             return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error'}, status=400)
+def profile(request):
+    if request.user.is_authenticated:
+        user = request.user
+    else:
+        # For testing, if not logged in, show the first user's profile
+        user = User.objects.first()
+        if not user:
+            # Create a test user if none exists
+            user, created = User.objects.get_or_create(username='testuser', email='test@example.com')
+    
+    profile, created = Profile.objects.get_or_create(user=user)
+    return render(request, 'zone/profile.html', {'profile': profile})

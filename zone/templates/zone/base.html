@@ -32,7 +32,7 @@
             <a href="{% url 'home' %}" class="nav-item"><i class="fas fa-home"></i></a>
             <a href="{% url 'sale' %}" class="nav-item"><i class="fas fa-tags"></i></a>
             <a href="#" class="nav-item"><i class="fas fa-comments"></i></a>
-            <a href="#" class="nav-item"><i class="fas fa-user"></i></a>
+            <a href="{% url 'profile' %}" class="nav-item no-ajax"><i class="fas fa-user"></i></a>
         </div>
     </footer>
 
@@ -44,7 +44,7 @@
                 link.addEventListener('click', async (e) => {
                     // Only intercept internal links
                     const href = link.getAttribute('href');
-                    if (!href.startsWith('#') && !href.startsWith('http')) {
+                    if (!href.startsWith('#') && !href.startsWith('http') && !link.classList.contains('no-ajax')) {
                         e.preventDefault();
 
                         try {
